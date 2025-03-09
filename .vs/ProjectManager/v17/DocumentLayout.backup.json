@@ -1,0 +1,144 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\drboo\\Desktop\\ProjectManager\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\extensions\\interfaceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\extensions\\interfaceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\extensions\\selectextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\extensions\\selectextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\projects\\basicproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\projects\\basicproject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\tasks\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\tasks\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\userinterfaces\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\userinterfaces\\maininterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|c:\\users\\drboo\\desktop\\projectmanager\\classlibrary\\userinterfaces\\projectinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF817B59-5C68-440D-99CA-43D7DDABEC53}|ClassLibrary\\ClassLibrary.csproj|solutionrelative:classlibrary\\userinterfaces\\projectinterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InterfaceExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Extensions\\InterfaceExtensions.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\Extensions\\InterfaceExtensions.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Extensions\\InterfaceExtensions.cs",
+              "RelativeToolTip": "ClassLibrary\\Extensions\\InterfaceExtensions.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAGEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T18:21:53.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SelectExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Extensions\\SelectExtensions.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\Extensions\\SelectExtensions.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Extensions\\SelectExtensions.cs",
+              "RelativeToolTip": "ClassLibrary\\Extensions\\SelectExtensions.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAawDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:42:29.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Tasks\\Task.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\Tasks\\Task.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Tasks\\Task.cs",
+              "RelativeToolTip": "ClassLibrary\\Tasks\\Task.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAawG0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:35:58.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BasicProject.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Projects\\BasicProject.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\Projects\\BasicProject.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\Projects\\BasicProject.cs",
+              "RelativeToolTip": "ClassLibrary\\Projects\\BasicProject.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAIA1wJgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:25:46.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProjectInterface.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\UserInterfaces\\ProjectInterface.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\UserInterfaces\\ProjectInterface.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\UserInterfaces\\ProjectInterface.cs",
+              "RelativeToolTip": "ClassLibrary\\UserInterfaces\\ProjectInterface.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwC8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:28:17.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainInterface.cs",
+              "DocumentMoniker": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\UserInterfaces\\MainInterface.cs",
+              "RelativeDocumentMoniker": "ClassLibrary\\UserInterfaces\\MainInterface.cs",
+              "ToolTip": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\UserInterfaces\\MainInterface.cs",
+              "RelativeToolTip": "ClassLibrary\\UserInterfaces\\MainInterface.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAawF0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-08T13:23:00.563Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ojDKXHeDgCo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\drboo\\Desktop\\ProjectManager\\ClassLibrary\\ClassLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\drboo\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512"
+  ],
+  "logs": []
+}
