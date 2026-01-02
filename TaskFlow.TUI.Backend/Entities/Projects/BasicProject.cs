@@ -1,10 +1,9 @@
-﻿#nullable disable
-
-using Spectre.Console;
+﻿using Spectre.Console;
 using System.Text.Json.Serialization;
 
 using TaskFlow.TUI.Backend.UI;
 using TaskFlow.TUI.Backend.Contracts;
+using TaskFlow.TUI.Backend.Tools;
 
 namespace TaskFlow.TUI.Backend.Entities;
 
@@ -19,11 +18,12 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
 
     [JsonPropertyName("Tasks")]
     public List<Task> Tasks { get; set; }
-    //public DateOnly StartDate {get; set;}
-    //public DateOnly EndDate {get; set;}
-    //internal ProjectStatus Status{ get; set; }
+    // public ProjectStatus Status{ get; set; }
 
-    public BasicProject(string name, IEnumerable<Participant> participants = null, IEnumerable<Task> tasks = null)
+
+
+    // --------- Constructors ---------
+    public BasicProject(string name, IEnumerable<Participant>? participants = null, IEnumerable<Task>? tasks = null)
     {
         Name = name;
         
@@ -32,107 +32,136 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
         
         if (tasks is null) Tasks = [];
         else Tasks = tasks.ToList();
-        //StartDate = DateOnly.FromDateTime(DateTime.Today);
-        //EndDate = DateOnly.FromDateTime(DateTime.Today.AddDays(14));
     }
-    public override bool Equals(object obj) => base.Equals(obj);
+
+
+
+    // --------- Interface Implementations ---------
+    public override bool Equals(object? obj) => base.Equals(obj);
     public override int GetHashCode() => Name.GetHashCode();
     public override string ToString() => Name;
-    public bool Equals(BasicProject other)
+    public bool Equals(BasicProject? other)
     {
         ArgumentNullException.ThrowIfNull(other);
         if (this.Name == null || other.Name == null) return false;
 
         return Name.Equals(other.Name);
     }
+
+
+
+    // --------- Methods ---------
     internal void AddParticipant() 
     {
-        AnsiConsole.MarkupLine($">> Please provide a [bold yellow]participant name[/]");
-        string participantName = Console.ReadLine().Trim().ToUpper();
+        TextPrompt<string> prompt = new TextPrompt<string>(">> Please provide a [bold Gold1]participant name[/]");
+        string participantName = AnsiConsole.Prompt(prompt);
+
+        Markup msg;
 
         if (!InterfaceExtensions.IsAlphanumeric(participantName))
         {
-            AnsiConsole.MarkupLine("[bold red]Command not valid, ADD PARTICIPANT requires a valid participant name (A-Z, 0-9, _ ).[/]");
+            msg = new Markup("[bold OrangeRed1]Command not valid, ADD PARTICIPANT requires a valid participant name (A-Z, 0-9, _ ).[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
         if(Participants.Contains(participantName))
         {
-            AnsiConsole.MarkupLine($"[bold red]The participant [bold yellow]{participantName}[/] already exists.[/]");
+            msg = new Markup("bold OrangeRed1]The participant [bold Gold1]{participantName}[/] already exists.[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
 
         Participant participant = new(participantName);
         Participants.Add(participant);
-
-        AnsiConsole.MarkupLine($"[bold yellow]{participant}[/] [bold green]has been added to the project.[/]");
+        
+        msg = new Markup($"[bold Gold1]{participant}[/] has been added to the project.");
+        Logger.Enqueue(msg);
+        InterfaceExtensions.DrawFrame(msg);
     }
     internal void RemoveParticipants() 
     {
+        Markup msg;
+        
         if (Participants.Count == 0)
         {
-            AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
+            msg = new Markup("[bold OrangeRed1]No objects found[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
-        Participant participant = SelectExtensions.SelectObjectOfType(Participants);
+        Participant participant = ISelectableExtensions.SelectObjectOfType(Participants);
         if(participant is null) 
-        {   
-            AnsiConsole.MarkupLine($"The operation is being aborted...");
+        {               
+            msg = new Markup("The operation is being aborted...");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
-        Participants.Remove(participant);
-    }
 
+        Participants.Remove(participant);
+
+        // TODO Enque message
+        msg = new Markup($"[bold Gold1]{participant}[/] has been added to the project.");
+        InterfaceExtensions.DrawFrame(msg);
+    }
     internal void AddTask()
     {
-        AnsiConsole.MarkupLine($">> Please provide a [bold yellow]task name[/]");
-        string taskName = Console.ReadLine().Trim().ToUpper();
+        TextPrompt<string> prompt = new TextPrompt<string>(">> Please provide a [bold Gold1]task name[/]");
+        string taskName = AnsiConsole.Prompt(prompt);
+
+        Markup msg;
 
         if (!InterfaceExtensions.IsAlphanumeric(taskName))
         {
-            AnsiConsole.MarkupLine("[bold red]Command not valid, ADD TASK requires a valid task name (A-Z, 0-9, _ ).[/]");
+            msg = new Markup("[bold OrangeRed1]Command not valid, ADD TASK requires a valid task name (A-Z, 0-9, _ ).[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
-        //if (taskName == "EXIT") 
-        //{   
-        //    AnsiConsole.MarkupLine($"The operation is being aborted...");
-        //    return;
-        //}
         if(Tasks.Contains(taskName.ToUpper())) 
         {
-            AnsiConsole.MarkupLine($"[bold red]The task [bold yellow]{taskName}[/] already exists.[/]"); 
+            msg = new Markup("[bold OrangeRed1]The task [bold Gold1]{taskName}[/] already exists.[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
         Task task = new (taskName.ToUpper());
-        AnsiConsole.MarkupLine($"[bold green]The task [bold yellow]{taskName}[/] has been created.[/]");
+        AnsiConsole.MarkupLine($"The task [bold Gold1]{taskName}[/] has been created.");
         Tasks.Add(task);
+
+        
         OpenTask(task);
     }
-    internal void OpenTask(Task task = null)
+    internal void OpenTask(Task? task = null)
     {
+        Markup msg;
         if (Tasks.Count == 0)
         {
-            AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
+            msg = new Markup ("[bold OrangeRed1]No objects found[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
         if(task is null)
         {
-            task = SelectExtensions.SelectObjectOfType(Tasks);
+            task = ISelectableExtensions.SelectObjectOfType(Tasks);
         }
-        if(task is null) 
-        {   
-            AnsiConsole.MarkupLine($"The operation is being aborted...");
-            return;
-        }
+
         TaskInterface.CommandLoop(task);
     }
     internal void RemoveTask() 
     {
+        Markup msg;
         if (Tasks.Count == 0)
         {
-            AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
+            msg = new Markup ("[bold OrangeRed1]No objects found[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
-        Task task = SelectExtensions.SelectObjectOfType(Tasks);
+        Task task = ISelectableExtensions.SelectObjectOfType(Tasks);
         if (!Tasks.Contains(task)) 
         {
             Tasks.Remove(task);
@@ -140,9 +169,12 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
     }
     internal void ListParticipants() 
     {
+        Markup msg;
         if (Participants.Count == 0)
         {
-            AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
+            msg = new Markup ("[bold OrangeRed1]No objects found[/]");
+            InterfaceExtensions.DrawLoopFrame(msg);
+            Logger.Enqueue(msg);
             return;
         }
 
@@ -157,7 +189,7 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
             {
                 table.AddRow(
                     new Markup(participant.Name, Color.Grey),
-                    new Markup("[grey]0 tasks[/]")
+                    new Markup("[bold Grey35]0 tasks[/]")
                 );
             } else if (participant.Tasks.Count > 0)
             {
@@ -166,7 +198,7 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
                     new Rows(participant.Tasks.Select(x => new Text(x.Name)).ToList()));
             }
         }
-        AnsiConsole.Write(table);
+        InterfaceExtensions.DrawLoopFrame(table);
     }
     internal void ShowStatus()  
     {
@@ -195,9 +227,12 @@ internal class BasicProject : IEquatable<BasicProject>, ISelectable
                 );
             }
         }
-        AnsiConsole.Write(table);
+        InterfaceExtensions.DrawLoopFrame(table);
     }
 
+
+    
+    // --------- Operators ---------
     public static implicit operator BasicProject(string name)
     {
         return new BasicProject(name);

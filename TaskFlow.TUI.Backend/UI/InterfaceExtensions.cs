@@ -1,35 +1,82 @@
-﻿#nullable disable
-
+﻿using System.Linq;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 using TaskFlow.TUI.Backend.Entities;
+using TaskFlow.TUI.Backend.Tools;
 using Task = TaskFlow.TUI.Backend.Entities.Task;
 
 namespace TaskFlow.TUI.Backend.UI;
 
 public static class InterfaceExtensions
 {
-    internal static void RedrawFrame(IRenderable body = null)
-    {
-        DrawFrame(body, false, false);
+    // --------- Navigator ---------
+    internal static void CommandNavigator(ref string command, IEnumerable<string> dictionary)
+    {   
+        DrawFrame();
+        command = AnsiConsole.Prompt
+        (
+            new SelectionPrompt<string>()
+            .Title(">> What would you like to do?")
+            .PageSize(10)
+            .HighlightStyle(Style.Parse("Gold1"))
+            .AddChoices(dictionary)
+        );
+        
+        Markup body = new Markup($">> Selected [bold Gold1]{command}[/]");
+        AppendToFrame(body);
     }
-    internal static void AppendToFrame(IRenderable body = null)
+
+
+
+    // --------- Frame Management ---------
+    public static void DrawLoopFrame(IRenderable body)
     {
-        DrawFrame(body, true, true);
+        Markup hint = new Markup("[Grey35]Press [Italic]q[/] | [Italic]Esc[/] | [Italic]Enter[/] to close...[/]"); 
+        IEnumerable<ConsoleKey> escKeys = new List<ConsoleKey>() {ConsoleKey.Escape, ConsoleKey.Enter, ConsoleKey.Q};
+
+        AppendToFrame(body);
+        Console.WriteLine();
+        AppendToFrame(hint);
+        
+        while (true)
+        {
+            ConsoleKeyInfo keyRead = Console.ReadKey(true);
+            if (escKeys.Contains(keyRead.Key))
+                return;
+        }
     }
-    private static void DrawFrame(IRenderable body, bool append, bool newLine)
+    public static void DrawFrame(IRenderable? body = null)
     {
-        var appHeader = new FigletText("TaskFlow TUI")
+        _drawFrame(body, false, false);
+    }
+    public static void AppendToFrame(IRenderable body)
+    {
+        _drawFrame(body, true, true);
+    }
+    public static void PrepareInputFrame(IRenderable body)
+    {
+        _drawFrame(body, true, false);
+    }
+    private static void _drawFrame(IRenderable? body, bool append, bool newLine)
+    {
+        var appHeader = new FigletText("TaskFlow.TUI")
             .Centered()
             .Color(Color.Orange1);
         
-        var rule = new Rule();
+        var appPanel = new Panel(Logger.MessageDump)
+            { Height = 7 }
+            .Header("Messages")
+            .RoundedBorder()
+            .Expand();
+
+        var appRule = new Rule();
 
         if (!append)
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(appHeader);
-            AnsiConsole.Write(rule);
+            AnsiConsole.Write(appRule);
+            AnsiConsole.Write(appPanel);
         }
         AnsiConsole.Write(body ?? new Markup(string.Empty));
 
@@ -43,29 +90,11 @@ public static class InterfaceExtensions
         //     else
         //         Console.SetCursorPosition(x + ((Markup)body).Length, y);
     }
-    public static void EntryPoint()
-    {
-        MainInterface.CommandLoop();
 
-        Console.WriteLine("Have a nice day!");
-        Console.Read();
-    }
-    internal static void CommandNavigator(ref string command, IEnumerable<string> dictionary)
-    {   
-        RedrawFrame();
-        command = AnsiConsole.Prompt
-        (
-            new SelectionPrompt<string>()
-            .Title(">> What would you like to do?")
-            .PageSize(10)
-            .HighlightStyle(Style.Parse("Gold1"))
-            .AddChoices(dictionary)
-        );
-        
-        Markup body = new Markup($">> Selected [bold Gold1]{command}[/]");
-        AppendToFrame(body);
-    }
-    internal static bool IsAlphanumeric(string param)    
+
+
+    // --------- Tools ---------
+    public static bool IsAlphanumeric(string param)    
     {
         if (string.IsNullOrWhiteSpace(param))
             return false;
@@ -82,7 +111,7 @@ public static class InterfaceExtensions
         {
             Console.WriteLine("Do you want to proceed? The changes are not reversible. [Y/N]");
 
-            string response = Console.ReadLine().Trim();
+            string response = Console.ReadLine()?.Trim()!;
             string[] validInput = ["Y", "N", "YES", "NO"];
                     
             if (validInput.Contains(response.ToUpper()))
@@ -103,7 +132,7 @@ public static class InterfaceExtensions
 
         return false;
     }
-    public static void Seed()
+    internal static void Seed()
     {
         IEnumerable<Task> tasks = new List<Task>()
         {
@@ -119,14 +148,10 @@ public static class InterfaceExtensions
         {
             new BasicProject("CUSTOMER_SUPPORT", participants, tasks),
         };
-        foreach (Task wa_task in tasks)
+        foreach (Task task in tasks)
         {
-            foreach (Participant wa_participant in participants)
-            {
-                wa_task.Assignees.Add(wa_participant);
-            }
+            task.Assignees.AddRange(participants);
         }
-
-        MainInterface.Projects.AddRange(projects);  
+        ProjectFactory.Projects.AddRange(projects);  
     }    
 }

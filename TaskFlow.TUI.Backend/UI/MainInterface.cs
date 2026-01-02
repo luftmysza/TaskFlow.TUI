@@ -3,16 +3,17 @@
 using Spectre.Console;
 using System.Text.Json.Serialization;
 using TaskFlow.TUI.Backend.Entities;
+using TaskFlow.TUI.Backend.Tools;
 using TaskStatus = TaskFlow.TUI.Backend.Entities.TaskStatus;
 
 namespace TaskFlow.TUI.Backend.UI;
 
-internal static class MainInterface
+public static class MainInterface
 {
     internal static bool Quit = false;
     internal static string command;
     [JsonPropertyName("MainInterface.Projects")]
-    public static List<BasicProject> Projects = [];
+    // internal static List<BasicProject> Projects = [];
     internal static List<string> Commands = 
         [
             "CREATE PROJECT", 
@@ -23,8 +24,9 @@ internal static class MainInterface
             "LOAD STATE",
             "EXIT"
         ];
-    internal static void CommandLoop()
+    public static void RunApp()
     {
+        InterfaceExtensions.Seed();
         Quit = false;
         while (!Quit)
         {      
@@ -32,88 +34,25 @@ internal static class MainInterface
 
             CommandRoute();
         }
+        Console.WriteLine("Have a nice day!");
     }
     internal static void CommandRoute()
     {
         switch (command)
         {
-            case "CREATE PROJECT"   : CreateProject();      break;
-            case "OPEN PROJECT"     : OpenProject();        break;
-            case "DELETE PROJECT"   : DeleteProject();      break;
-            case "SHOW STATUS"      : ShowStatus();         break;
-            case "SAVE STATE"       : Save();               break;
-            case "LOAD STATE"       : Load();               break;
-            case "EXIT"             : {Quit = true;Save();} break;
-                       
-            default: AnsiConsole.MarkupLine("[bold red]{0} was not recognized, please try again.[/]", command); break;
-        }
-    }
-    internal static void CreateProject()
-    {
-        Markup body = new Markup($">> Please provide a [bold Gold1]project name[/]: ");
-        InterfaceExtensions.AppendToFrame(body);
+            case "CREATE PROJECT"   : ProjectFactory.CreateProject();       break;
+            case "OPEN PROJECT"     : ProjectFactory.OpenProject();         break;
+            case "DELETE PROJECT"   : ProjectFactory.DeleteProject();       break;
+            case "SHOW STATUS"      : ShowStatus();                         break;
+            case "SAVE STATE"       : Save();                               break;
+            case "LOAD STATE"       : Load();                               break;
+            case "EXIT"             : {Quit = true;}                        break;
 
-        string projectName = Console.ReadLine().Trim().ToUpper();
-
-        if (!InterfaceExtensions.IsAlphanumeric(projectName))
-        {
-            AnsiConsole.MarkupLine("[bold OrangeRed1]Command not valid, CREATE requires a valid project name (A-Z, 0-9, _ ).[/]");
-            return;
+            default: 
+                Markup msg = new Markup("[bold OrangeRed1]{0} was not recognized, please try again.[/]", command);
+                Logger.Enqueue(msg);
+                break;
         }
-        //if (projectName == "EXIT") 
-        //{   
-        //    AnsiConsole.MarkupLine($"The operation is being aborted...");
-        //    return;
-        //}
-        if (Projects.Contains(projectName))
-        {
-            AnsiConsole.MarkupLine($"[bold OrangeRed1]The project {projectName} already exists.[/]");
-            return;
-        }
-       
-        body = new Markup($"The project [bold Gold1]{projectName}[/] has been successfully created.");
-        InterfaceExtensions.RedrawFrame(body);
-
-        BasicProject project = new (projectName);
-        Projects.Add(project);
-        ProjectInterface.CommandLoop(project);
-    }
-    internal static void OpenProject()
-    {
-        if (Projects.Count == 0)
-        {
-            AnsiConsole.MarkupLine("[bold OrangeRed1]No objects found[/]");
-            return;
-        }
-        BasicProject project = SelectExtensions.SelectObjectOfType(Projects);
-        if (project is null) 
-        {   
-            AnsiConsole.MarkupLine($"The operation is being aborted...");
-            return;
-        }
-        ProjectInterface.CommandLoop(project);
-    }
-    internal static void DeleteProject()    
-    {
-        if (Projects.Count == 0)
-        {
-            AnsiConsole.MarkupLine("[bold OrangeRed1]No objects found[/]");
-            return;
-        }
-        //string project = InterfaceExtensions.SelectObjectOfType(new HashSet<ISelectable>(Projects.Cast<ISelectable>()));
-        BasicProject project = SelectExtensions.SelectObjectOfType(Projects);
-        //if(project == "EXIT")
-        if (project is null)
-        {   
-            AnsiConsole.MarkupLine($"The operation is being aborted...");
-            return;
-        }
-        if (InterfaceExtensions.AreYouSure()) 
-        {
-            Projects.Remove(project);
-            AnsiConsole.MarkupLine($"The project [bold Gold1]{project}[/] has been successfully deleted.");
-        }
-        return;
     }
     internal static void ShowStatus()
     {
@@ -121,7 +60,7 @@ internal static class MainInterface
         table.AddColumns(new TableColumn("Project"), new TableColumn("Progress"));
         table.Border(TableBorder.Rounded);
 
-        foreach (BasicProject project in Projects)
+        foreach (BasicProject project in ProjectFactory.Projects)
         {
             table.AddRow(
                 new Markup(project.Name),
@@ -143,9 +82,9 @@ internal static class MainInterface
                         Color.Red)
             );        
         }
-        AnsiConsole.Write(table);
+        InterfaceExtensions.DrawLoopFrame(table);
     }
-    public static void Save()
+    internal static void Save()
     {
         //JsonSerializerOptions options = new JsonSerializerOptions
         //{
@@ -157,7 +96,7 @@ internal static class MainInterface
 
         //File.WriteAllText(InterfaceExtensions.filePath, json);
     }
-    public static void Load()
+    internal static void Load()
     {
         //if (File.Exists(InterfaceExtensions.filePath))
         //{

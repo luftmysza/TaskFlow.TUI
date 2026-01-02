@@ -1,14 +1,12 @@
 ﻿#nullable disable
 
 using Spectre.Console;
-
 using TaskFlow.TUI.Backend.Entities;
 
 namespace TaskFlow.TUI.Backend.UI;
 
 internal class ProjectInterface 
 {
-    // --------- Fields ---------
     internal static bool Quit = false;
     internal static string command;
     internal static BasicProject CurrentProject;
@@ -23,9 +21,6 @@ internal class ProjectInterface
             "SHOW STATUS",
             "EXIT"
         ];
-
-
-    // --------- Methods ---------
     internal static void CommandLoop(BasicProject Project)
     {   
         Quit = false;
@@ -52,7 +47,7 @@ internal class ProjectInterface
             case "SHOW STATUS": CurrentProject.ShowStatus(); break;
             case "EXIT": Quit = true; break;
 
-            default: AnsiConsole.WriteLine("{0} was not recognized, please try again.", command); break;
+            default: AnsiConsole.WriteLine("[bold OrangeRed1]{0} was not recognized, please try again.[/]", command); break;
         }
     }
 }

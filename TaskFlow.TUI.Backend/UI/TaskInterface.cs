@@ -1,7 +1,6 @@
 ﻿#nullable disable
 
 using Spectre.Console;
-
 using TaskFlow.TUI.Backend.Entities;
 using Task = TaskFlow.TUI.Backend.Entities.Task;
 
