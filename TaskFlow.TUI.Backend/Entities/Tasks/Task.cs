@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Spectre.Console;
+﻿using Spectre.Console;
 using System.Text.Json.Serialization;
 
 using TaskFlow.TUI.Backend.UI;
@@ -9,7 +7,8 @@ using TaskFlow.TUI.Backend.Contracts;
 namespace TaskFlow.TUI.Backend.Entities;
 
 internal class Task : IEquatable<Task>, ISelectable
-{
+{   
+    // --------- Fields ---------
     [JsonPropertyName("Name")]
     public string Name { get; set; }
 
@@ -19,7 +18,10 @@ internal class Task : IEquatable<Task>, ISelectable
     [JsonPropertyName("Status")]
     public TaskStatus Status{ get; set; }
 
-    public Task(string name, IEnumerable<Participant> assignees = null, TaskStatus status = TaskStatus.NotStarted) 
+
+
+    // --------- Constructors ---------
+    public Task(string name, IEnumerable<Participant>? assignees = null, TaskStatus status = TaskStatus.NotStarted) 
     {
         Name = name;
         
@@ -30,8 +32,9 @@ internal class Task : IEquatable<Task>, ISelectable
     }
 
 
+
     // --------- Overrides ---------
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return base.Equals(obj);
     }
@@ -47,7 +50,7 @@ internal class Task : IEquatable<Task>, ISelectable
 
 
     // --------- Interface Implementations ---------
-    public bool Equals(Task other)
+    public bool Equals(Task? other)
     {
         ArgumentNullException.ThrowIfNull(other);
         if (this.Name == null || other.Name == null) return false;
@@ -58,8 +61,10 @@ internal class Task : IEquatable<Task>, ISelectable
 
 
     // --------- Methods ---------
-    internal void TaskAssigneeAdd(string participant = null)
+    internal void TaskAssigneeAdd(string? participant = null)
     {
+        // TODO input argument
+        throw new NotImplementedException();
         if (this.Status == TaskStatus.Completed && this.Status == TaskStatus.Cancelled)
         {
             AnsiConsole.MarkupLine("[bold blue]The task can no longer be changed[/]");
@@ -69,7 +74,7 @@ internal class Task : IEquatable<Task>, ISelectable
             AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
             return;
         }
-        List<Participant> participants = SelectExtensions.SelectMultipleOfType
+        List<Participant> participants = ISelectableExtensions.SelectMultipleOfType
             (ProjectInterface.CurrentProject.Participants, Assignees);
 
         if (participants.Count == 0)
@@ -96,6 +101,8 @@ internal class Task : IEquatable<Task>, ISelectable
     }
     internal void TaskAssigneeRemove(string participant = null)
     {
+        // TODO input argument
+        throw new NotImplementedException();
         if (this.Status == TaskStatus.Completed && this.Status == TaskStatus.Cancelled)
         {
             AnsiConsole.MarkupLine("[bold blue]The task can no longer be changed[/]");
@@ -105,7 +112,7 @@ internal class Task : IEquatable<Task>, ISelectable
             AnsiConsole.MarkupLine("[bold blue]No objects found[/]");
             return;
         }
-        List<Participant> participants = SelectExtensions.SelectMultipleOfType(this.Assignees);
+        List<Participant> participants = ISelectableExtensions.SelectMultipleOfType(this.Assignees);
 
         if (participants.Count == 0)
         {
@@ -124,9 +131,8 @@ internal class Task : IEquatable<Task>, ISelectable
     }
     internal void TaskStatusChange()
     {
-        //string newStatus = SelectExtensions.SelectEnum(TaskStatusStrings);
-        
-        TaskStatus status = SelectExtensions.SelectEnum<TaskStatus>();
+        throw new NotImplementedException();
+        TaskStatus status = ISelectableExtensions.SelectEnum<TaskStatus>();
         
 
         // TaskStatus newStatusCast = TaskStatusStrings.FirstOrDefault(kvp => kvp.Value == newStatus).Key;
