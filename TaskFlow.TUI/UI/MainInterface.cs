@@ -2,11 +2,11 @@
 
 using Spectre.Console;
 using System.Text.Json.Serialization;
-using TaskFlow.TUI.Backend.Entities;
-using TaskFlow.TUI.Backend.Tools;
-using TaskStatus = TaskFlow.TUI.Backend.Entities.TaskStatus;
+using TaskFlow.TUI.Entities;
+using TaskFlow.TUI.Tools;
+using TaskStatus = TaskFlow.TUI.Entities.TaskStatus;
 
-namespace TaskFlow.TUI.Backend.UI;
+namespace TaskFlow.TUI.UI;
 
 public static class MainInterface
 {

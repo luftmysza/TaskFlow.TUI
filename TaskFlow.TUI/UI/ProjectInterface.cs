@@ -1,9 +1,9 @@
 ﻿#nullable disable
 
 using Spectre.Console;
-using TaskFlow.TUI.Backend.Entities;
+using TaskFlow.TUI.Entities;
 
-namespace TaskFlow.TUI.Backend.UI;
+namespace TaskFlow.TUI.UI;
 
 internal class ProjectInterface 
 {

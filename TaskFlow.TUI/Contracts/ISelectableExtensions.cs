@@ -4,7 +4,7 @@ using Spectre.Console;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace TaskFlow.TUI.Backend.Contracts;
+namespace TaskFlow.TUI.Contracts;
 
 internal static class ISelectableExtensions
 {

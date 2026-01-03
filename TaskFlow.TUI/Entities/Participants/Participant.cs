@@ -2,9 +2,9 @@
 
 using System.Collections;
 using System.Text.Json.Serialization;
-using TaskFlow.TUI.Backend.Contracts;
+using TaskFlow.TUI.Contracts;
 
-namespace TaskFlow.TUI.Backend.Entities;
+namespace TaskFlow.TUI.Entities;
 
 internal class Participant : IEquatable<Participant>, IEnumerable<Task>, ISelectable
 {

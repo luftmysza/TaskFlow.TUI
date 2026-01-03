@@ -1,4 +1,4 @@
-﻿namespace TaskFlow.TUI.Backend.Contracts;
+﻿namespace TaskFlow.TUI.Contracts;
 
 public interface ISelectable
 {

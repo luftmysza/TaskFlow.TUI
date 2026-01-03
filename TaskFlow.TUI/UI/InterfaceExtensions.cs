@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Spectre.Console;
 using Spectre.Console.Rendering;
-using TaskFlow.TUI.Backend.Entities;
-using TaskFlow.TUI.Backend.Tools;
-using Task = TaskFlow.TUI.Backend.Entities.Task;
+using TaskFlow.TUI.Entities;
+using TaskFlow.TUI.Tools;
+using Task = TaskFlow.TUI.Entities.Task;
 
-namespace TaskFlow.TUI.Backend.UI;
+namespace TaskFlow.TUI.UI;
 
 public static class InterfaceExtensions
 {

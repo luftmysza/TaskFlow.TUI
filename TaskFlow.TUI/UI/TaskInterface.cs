@@ -1,10 +1,10 @@
 ﻿#nullable disable
 
 using Spectre.Console;
-using TaskFlow.TUI.Backend.Entities;
-using Task = TaskFlow.TUI.Backend.Entities.Task;
+using TaskFlow.TUI.Entities;
+using Task = TaskFlow.TUI.Entities.Task;
 
-namespace TaskFlow.TUI.Backend.UI;
+namespace TaskFlow.TUI.UI;
 
 internal class TaskInterface
 {

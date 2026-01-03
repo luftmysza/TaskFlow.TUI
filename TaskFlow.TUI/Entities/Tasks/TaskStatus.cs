@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TaskFlow.TUI.Backend.Entities;
+namespace TaskFlow.TUI.Entities;
 
 internal enum TaskStatus
 {

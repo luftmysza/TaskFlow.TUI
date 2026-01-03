@@ -2,7 +2,7 @@ using System;
 using Microsoft.VisualBasic;
 using Spectre.Console;
 
-namespace TaskFlow.TUI.Backend.Tools;
+namespace TaskFlow.TUI.Tools;
 
 public static class Logger
 {

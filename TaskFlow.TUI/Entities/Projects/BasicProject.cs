@@ -1,11 +1,11 @@
 ﻿using Spectre.Console;
 using System.Text.Json.Serialization;
 
-using TaskFlow.TUI.Backend.UI;
-using TaskFlow.TUI.Backend.Contracts;
-using TaskFlow.TUI.Backend.Tools;
+using TaskFlow.TUI.UI;
+using TaskFlow.TUI.Contracts;
+using TaskFlow.TUI.Tools;
 
-namespace TaskFlow.TUI.Backend.Entities;
+namespace TaskFlow.TUI.Entities;
 
 internal class BasicProject : IEquatable<BasicProject>, ISelectable
 {

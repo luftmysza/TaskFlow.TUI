@@ -1,10 +1,10 @@
 ﻿using Spectre.Console;
 using System.Text.Json.Serialization;
 
-using TaskFlow.TUI.Backend.UI;
-using TaskFlow.TUI.Backend.Contracts;
+using TaskFlow.TUI.UI;
+using TaskFlow.TUI.Contracts;
 
-namespace TaskFlow.TUI.Backend.Entities;
+namespace TaskFlow.TUI.Entities;
 
 internal class Task : IEquatable<Task>, ISelectable
 {   
